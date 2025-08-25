@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_v2/features/main_layout/home/presentation/screens/home_screen.dart';
 import 'package:movies_v2/features/main_layout/on_boarding/widgets/on_boarding_bottom_sheet.dart';
 import 'package:movies_v2/features/main_layout/on_boarding/widgets/on_boarding_data.dart';

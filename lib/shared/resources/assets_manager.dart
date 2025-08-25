@@ -17,19 +17,19 @@ class ImageAssets {
 
 
   //Navigation Bar
-  static const String clock = "$imagePath/clock.png";
-  static const String home = "$imagePath/home.png";
-  static const String search = "$imagePath/search.png";
-  static const String browse = "$imagePath/browse.png";
-  static const String person = "$imagePath/person.png";
+  static const String clock = "$iconsPath/clock.png";
+  static const String home = "$iconsPath/home.png";
+  static const String search = "$iconsPath/search.png";
+  static const String browse = "$iconsPath/browse.png";
+  static const String person = "$iconsPath/profile.png";
 
   //Auth
-  static const String name = "$imagePath/name.png";
-  static const String email = "$imagePath/email.png";
-  static const String password = "$imagePath/password.png";
-  static const String empty = "$imagePath/Empty_1.png";
-  static const String usa = "$imagePath/usa.png";
-  static const String egypt = "$imagePath/EG.png";
+  static const String name = "$iconsPath/name.png";
+  static const String email = "$iconsPath/email.png";
+  static const String password = "$iconsPath/password.png";
+  static const String empty = "$iconsPath/Empty_1.png";
+  static const String usa = "$iconsPath/usa.png";
+  static const String egypt = "$iconsPath/EG.png";
 
 
   static const String heart = "$imagePath/heart.png";
