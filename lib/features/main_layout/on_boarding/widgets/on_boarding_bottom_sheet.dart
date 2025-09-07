@@ -27,8 +27,8 @@ class OnBoardingBottomSheet extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorsManager.black,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(37.r),
-          topRight: Radius.circular(37.r),
+          topLeft: Radius.circular(20.r),
+          topRight: Radius.circular(20.r),
         ),
         border: Border.all(
           color: ColorsManager.black,

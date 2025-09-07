@@ -7,6 +7,11 @@ const String svgPath = "assets/svg_images";
 class ImageAssets {
   static const String routeLogo = "$imagePath/splash_logo.png";
 
+  // Fonts
+  static const String available = "$imagePath/Available_Now.png";
+  static const String watchNow = "$imagePath/watch_now.png";
+
+
   //movies posters
   static const String moviePosters = "$imagePath/movie_ posters.png";
   static const String warMovie1917 = "$imagePath/1917_Sam.png";
@@ -14,6 +19,13 @@ class ImageAssets {
   static const String godFather = "$imagePath/godfather.png";
   static const String marvel = "$imagePath/marvel.png";
   static const String marvel2 = "$imagePath/marvels_2.png";
+  static const String blackWindow = "$imagePath/black_window.png";
+  static const String forgetPassword = "$imagePath/forgot_password.png";
+
+
+  //ScreenShot
+  static const String screenShot = "$imagePath/large_screenshot3.png";
+  static const String cast = "$imagePath/cast.png";
 
 
   //Navigation Bar
@@ -30,12 +42,21 @@ class ImageAssets {
   static const String empty = "$iconsPath/Empty_1.png";
   static const String usa = "$iconsPath/usa.png";
   static const String egypt = "$iconsPath/EG.png";
+  static const String google = "$iconsPath/google_logo.png";
+
+  static const String logo = "$imagePath/splash_logo.png";
 
 
-  static const String heart = "$imagePath/heart.png";
-  static const String phone = "$imagePath/phone.png";
-  static const String star = "$imagePath/star.png";
+  static const String heart = "$iconsPath/heart.png";
+  static const String phone = "$iconsPath/phone.png";
+  static const String star = "$iconsPath/star.png";
 
+  //Profile
+  static const String gamerProfile = "$iconsPath/gamer_1.png";
+  static const String folder = "$iconsPath/folder.png";
+  static const String options = "$iconsPath/options.png";
+  static const String save = "$iconsPath/save.png";
+  static const String play = "$iconsPath/play.png";
 
 
 }

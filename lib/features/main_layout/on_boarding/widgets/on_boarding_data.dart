@@ -10,18 +10,13 @@ class OnBoardingData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Image.asset(
-                urlImage,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ],
-          ),
-        ],
+      width: double.infinity,
+      height: double.infinity, // Fill all available space
+      child: Image.asset(
+        urlImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
       ),
     );
   }
