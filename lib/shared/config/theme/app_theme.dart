@@ -12,7 +12,9 @@ class AppTheme {
       showUnselectedLabels: false,
       selectedItemColor: ColorsManager.yellow,
       unselectedItemColor: ColorsManager.white,
-
+    ),
+    iconTheme: IconThemeData(
+      color: ColorsManager.white
     ),
   );
 

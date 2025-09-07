@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> tabs = [
     const HomeTab(),
-    const SearchTab(),
+     SearchTab(),
     const BrowseTab(),
     const ProfileTab(),
   ];
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        margin:  REdgeInsets.all(9),
+        margin:  REdgeInsets.all(12),
         decoration: BoxDecoration(
           color: ColorsManager.darkGrey,
           borderRadius: BorderRadius.circular(16.r),

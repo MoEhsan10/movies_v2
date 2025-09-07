@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_v2/shared/resources/colors_manager.dart';
-import 'package:movies_v2/shared/resources/styeles_manager.dart';
+import 'package:movies_v2/shared/config/theme/app_styles.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String label;
   final Color? backgroundColor;
+  final Color? foregroundColor;
   final double? radius;
   final void Function() onTap;
   final TextStyle? textStyle;
@@ -19,6 +20,7 @@ class CustomElevatedButton extends StatelessWidget {
       this.textStyle,
       this.isStadiumBorder = true,
       this.backgroundColor,
+      this.foregroundColor,
       this.radius,
       this.suffixIcon,
       required this.label,
@@ -28,11 +30,10 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: isStadiumBorder
-              ? const StadiumBorder()
-              : RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(17.r)),
-          backgroundColor: backgroundColor ?? ColorsManager.white,
+          foregroundColor: foregroundColor ,
+          shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.r)),
+          backgroundColor: backgroundColor ?? ColorsManager.lightYellow,
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
         ),
         onPressed: onTap,
@@ -41,13 +42,11 @@ class CustomElevatedButton extends StatelessWidget {
           children: [
             prefixIcon ?? const SizedBox(),
             SizedBox(
-              width: 24.w,
+              width: 10.w,
             ),
             Text(
               label,
-              style: textStyle ??
-                  getMediumStyle(color: ColorsManager.white)
-                      .copyWith(fontSize: 20.sp),
+              style: textStyle ?? AppStyles.elevatedButton
             ),
             SizedBox(
               width: 27.w,

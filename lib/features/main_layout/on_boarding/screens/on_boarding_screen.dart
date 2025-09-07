@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_v2/features/main_layout/home/presentation/screens/home_screen.dart';
 import 'package:movies_v2/features/main_layout/on_boarding/widgets/on_boarding_bottom_sheet.dart';
 import 'package:movies_v2/features/main_layout/on_boarding/widgets/on_boarding_data.dart';
 import 'package:movies_v2/shared/resources/assets_manager.dart';
 import 'package:movies_v2/shared/resources/colors_manager.dart';
+import 'package:movies_v2/shared/routes_manager/routes.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -67,7 +67,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void nextPage() {
     if (isLastPage) {
       // Navigate to main app
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+      Navigator.pushNamed(context, Routes.login);
     } else {
       controller.nextPage(
         duration: const Duration(milliseconds: 300),

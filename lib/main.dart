@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_v2/features/main_layout/home/presentation/screens/home_screen.dart';
 import 'package:movies_v2/shared/config/theme/app_theme.dart';
+import 'package:movies_v2/shared/routes_manager/routes.dart';
+import 'package:movies_v2/shared/routes_manager/routes_generator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const HomeScreen(),
+        onGenerateRoute: RoutesGenerator.getRoute,
+        initialRoute: Routes.onBoarding,
         theme: AppTheme.appTheme,
       ),
     );
