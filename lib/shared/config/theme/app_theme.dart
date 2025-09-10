@@ -13,7 +13,7 @@ class AppTheme {
       selectedItemColor: ColorsManager.yellow,
       unselectedItemColor: ColorsManager.white,
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: ColorsManager.white
     ),
   );

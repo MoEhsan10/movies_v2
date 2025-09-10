@@ -4,7 +4,8 @@ import 'package:movies_v2/shared/resources/assets_manager.dart';
 import 'package:movies_v2/shared/resources/colors_manager.dart';
 
 class RatingBox extends StatelessWidget {
-  const RatingBox({super.key});
+  const RatingBox({super.key, required this.rating});
+  final String rating;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +20,9 @@ class RatingBox extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center, // Center the content
         children: [
-          const Text(
-            '7.7',
-            style: TextStyle(
+           Text(
+            rating,
+            style: const TextStyle(
               color: ColorsManager.white,
               decoration: TextDecoration.none,
               fontSize: 12, // Add font size for consistency
