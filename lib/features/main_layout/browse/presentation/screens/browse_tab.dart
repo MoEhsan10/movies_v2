@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_v2/features/main_layout/browse/presentation/widgets/tab_item.dart';
-import 'package:movies_v2/shared/widgets/movies_list.dart';
 
 class BrowseTab extends StatefulWidget {
   const BrowseTab({super.key});
@@ -47,26 +46,26 @@ class _BrowseTabState extends State<BrowseTab> {
           ),
 
           // Centered Grid
-          Expanded(
-            child: Center(
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                padding: REdgeInsets.symmetric(horizontal: 20,vertical: 15), // Add horizontal padding for centering
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.w,
-                  mainAxisSpacing: 16.h,
-                  childAspectRatio: 0.7, // Adjust based on your MoviesList widget
-                ),
-                itemCount: 6, // Adjust item count as needed
-                itemBuilder: (context, index) => SizedBox(
-                    width: 189.w,
-                    height: 279.h,
-                    child: const MoviesList()),
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: Center(
+          //     child: GridView.builder(
+          //       shrinkWrap: true,
+          //       physics: const BouncingScrollPhysics(),
+          //       padding: REdgeInsets.symmetric(horizontal: 20,vertical: 15), // Add horizontal padding for centering
+          //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //         crossAxisCount: 2,
+          //         crossAxisSpacing: 10.w,
+          //         mainAxisSpacing: 16.h,
+          //         childAspectRatio: 0.7, // Adjust based on your MoviesList widget
+          //       ),
+          //       itemCount: 6, // Adjust item count as needed
+          //       itemBuilder: (context, index) => SizedBox(
+          //           width: 189.w,
+          //           height: 279.h,
+          //           child: const MoviesList()),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

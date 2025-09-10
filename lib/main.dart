@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_v2/shared/config/theme/app_theme.dart';
+import 'package:movies_v2/shared/di/service_locator.dart';
 import 'package:movies_v2/shared/routes_manager/routes.dart';
 import 'package:movies_v2/shared/routes_manager/routes_generator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesGenerator.getRoute,
-        initialRoute: Routes.onBoarding,
+        initialRoute: Routes.main,
         theme: AppTheme.appTheme,
       ),
     );

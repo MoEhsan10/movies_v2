@@ -29,8 +29,8 @@ class TabItem extends StatelessWidget {
         child: Text(
           categoryName,
           style: isSelected
-              ? TextStyle(color: ColorsManager.black)
-              : TextStyle(color: ColorsManager.yellow),
+              ? const TextStyle(color: ColorsManager.black)
+              : const TextStyle(color: ColorsManager.yellow),
           textAlign: TextAlign.center,
         ),
       ),

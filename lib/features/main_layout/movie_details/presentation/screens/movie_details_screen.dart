@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_v2/features/main_layout/home/domain/entites/movie_entity.dart';
+import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_cubit.dart';
+import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_states.dart';
 import 'package:movies_v2/features/main_layout/movie_details/presentation/widgets/cast_box.dart';
 import 'package:movies_v2/features/main_layout/movie_details/presentation/widgets/information_box.dart';
 import 'package:movies_v2/features/main_layout/movie_details/presentation/widgets/screen_shot_list.dart';
 import 'package:movies_v2/shared/config/theme/app_styles.dart';
+import 'package:movies_v2/shared/di/service_locator.dart';
 import 'package:movies_v2/shared/resources/assets_manager.dart';
 import 'package:movies_v2/shared/resources/colors_manager.dart';
 import 'package:movies_v2/shared/widgets/custom_elevated_button.dart';
+import 'package:movies_v2/shared/widgets/error_indicator.dart';
+import 'package:movies_v2/shared/widgets/loading_indicator.dart';
 import 'package:movies_v2/shared/widgets/movies_list.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
@@ -14,6 +21,9 @@ class MovieDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var movieDetails = ModalRoute.of(context)!.settings.arguments as MovieEntity;
+
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -26,8 +36,8 @@ class MovieDetailsScreen extends StatelessWidget {
                 children: [
                   // Movie poster - full width
                   Positioned.fill(
-                    child: Image.asset(
-                      ImageAssets.marvel,
+                    child: Image.network(
+                      movieDetails.largeCoverImage ?? '',
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit
@@ -97,20 +107,20 @@ class MovieDetailsScreen extends StatelessWidget {
                   ),
 
                   // Play icon - centered
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 100.h,
-                    // Leave space for text at bottom
-                    child: const Center(
-                      child: Icon(
-                        Icons.play_circle,
-                        color: ColorsManager.yellow,
-                        size: 97,
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   top: 0,
+                  //   left: 0,
+                  //   right: 0,
+                  //   bottom: 100.h,
+                  //   // Leave space for text at bottom
+                  //   child: const Center(
+                  //     child: Icon(
+                  //       Icons.play_circle,
+                  //       color: ColorsManager.yellow,
+                  //       size: 97,
+                  //     ),
+                  //   ),
+                  // ),
 
                   // Movie title - with proper text wrapping
                   Positioned(
@@ -118,7 +128,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     right: 20.w, // Added right constraint to prevent overflow
                     bottom: 60.h, // Position from bottom instead of top
                     child: Text(
-                      'Doctor Strange in the Multiverse of Madness',
+                      movieDetails.title,
                       style: AppStyles.mainStyle,
                       maxLines: 2, // Allow text to wrap to 2 lines
                       overflow: TextOverflow.ellipsis,
@@ -132,7 +142,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     right: 0,
                     bottom: 20.h,
                     child: Text(
-                      '2022',
+                      movieDetails.year.toString(),
                       style: AppStyles.year,
                       textAlign: TextAlign.center,
                     ),
@@ -153,12 +163,12 @@ class MovieDetailsScreen extends StatelessWidget {
                         .copyWith(color: ColorsManager.white),
                   ),
                   SizedBox(height: 18.h),
-                  const Row(
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InformationBox(title: '15', iconImage: ImageAssets.heart),
-                      InformationBox(title: '90', iconImage: ImageAssets.clock),
-                      InformationBox(title: '7.7', iconImage: ImageAssets.star),
+                     const InformationBox(title: '15', iconImage: ImageAssets.heart),
+                      InformationBox(title: movieDetails.runtime.toString(), iconImage: ImageAssets.clock),
+                      InformationBox(title: movieDetails.rating.toString(), iconImage: ImageAssets.star),
                     ],
                   ),
                   SizedBox(height: 18.h),
@@ -174,7 +184,6 @@ class MovieDetailsScreen extends StatelessWidget {
                       imageUrl: ImageAssets.screenShot,
                     ),
                     itemCount: 3,
-
                   ),
                   SizedBox(height: 18.h),
 
@@ -183,17 +192,39 @@ class MovieDetailsScreen extends StatelessWidget {
                     style: AppStyles.mainStyle,
                   ),
                   SizedBox(height: 18.h),
-                  GridView.builder(
-                      shrinkWrap: true, // Add this
-                      physics: const NeverScrollableScrollPhysics(), // Add this
-                      itemCount: 6, // Add itemCount - adjust as needed
-                      itemBuilder: (context, index) => const MoviesList(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 20.w,
-                        mainAxisSpacing: 18.h,
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.7, )),
+                  BlocProvider(
+                    create: (context) => serviceLocator.get<HomeCubit>()..getMoviesByGenre(""),
+                    child: BlocBuilder<HomeCubit, HomeStates>(
+                      builder: (context, state) {
+                        if(state is GetMoviesByGenreLoading){
+                          return const LoadingIndicator();
+                        }else if(state is GetMoviesByGenreError){
+                          return ErrorIndicator(message: state.message);
+                        }else if(state is GetMoviesByGenreSuccess){
+                          return GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.movies.length > 6 ? 6 : state.movies.length,
+                            itemBuilder: (context, index) =>
+                                MoviesList(
+                                  movie: state.movies[index],
+                                  rating: state.movies[index].rating.toString(),
+                                  imageUrl: state.movies[index].mediumCoverImage,
 
+                                ),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisSpacing: 20.w,
+                              mainAxisSpacing: 18.h,
+                              crossAxisCount: 2,
+                              childAspectRatio: 0.7,
+                            ),
+                          );
+                        }else{
+                          return const SizedBox();
+                        }
+                      },
+                    ),
+                  ),
 
                   SizedBox(height: 18.h),
 
@@ -206,8 +237,6 @@ class MovieDetailsScreen extends StatelessWidget {
                     'Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346',
                     style: AppStyles.description,
                   ),
-
-
 
                   SizedBox(height: 18.h),
 

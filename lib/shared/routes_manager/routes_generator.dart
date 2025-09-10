@@ -20,7 +20,7 @@ class RoutesGenerator {
         return MaterialPageRoute(builder: (context) => const OnBoardingScreen(),);
 
       case Routes.movieDetails:
-        return MaterialPageRoute(builder: (context) => const MovieDetailsScreen(),);
+        return MaterialPageRoute(builder: (context) => const MovieDetailsScreen(),settings: settings);
 
       case Routes.login:
         return MaterialPageRoute(builder: (context) => const LoginScreen(),);
