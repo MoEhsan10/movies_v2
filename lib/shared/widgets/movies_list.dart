@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_v2/features/main_layout/browse/domain/entities/browse_entity.dart';
 import 'package:movies_v2/features/main_layout/home/domain/entites/movie_entity.dart';
 import 'package:movies_v2/shared/routes_manager/routes.dart';
 import 'package:movies_v2/shared/widgets/rating_box.dart';
@@ -10,12 +11,14 @@ class MoviesList extends StatelessWidget {
     super.key,
     this.rating = '0.0',
     this.imageUrl,
-    required this.movie,
+    this.movie,
+    this.browse,
   });
 
   final String rating;
   final String? imageUrl;
-  final MovieEntity movie;
+  final MovieEntity? movie;
+  final BrowseEntity? browse;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,10 @@ class MoviesList extends StatelessWidget {
             Navigator.pushNamed(
               context,
               Routes.movieDetails,
-              arguments: movie,
+              arguments: {
+                'movie': movie,
+                'browse': browse,
+              },
             );
           },
           child: Stack(

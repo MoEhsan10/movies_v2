@@ -1,7 +1,8 @@
-import 'package:movies_v2/features/main_layout/home/data/models/Movies.dart';
-import 'package:movies_v2/features/main_layout/home/data/models/Data.dart';
-import 'package:movies_v2/features/main_layout/home/data/models/MoviesListModel.dart';
+
 import 'package:movies_v2/features/main_layout/home/domain/entites/movie_entity.dart';
+import 'package:movies_v2/shared/models/Data.dart';
+import 'package:movies_v2/shared/models/Movies.dart';
+import 'package:movies_v2/shared/models/MoviesListModel.dart';
 
 extension MoviesMapper on Movies {
   MovieEntity get toEntity => MovieEntity(

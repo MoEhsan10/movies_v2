@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_v2/features/main_layout/home/domain/entites/movie_entity.dart';
+import 'package:movies_v2/features/main_layout/browse/domain/entities/browse_entity.dart';
 import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_cubit.dart';
 import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_states.dart';
 import 'package:movies_v2/features/main_layout/movie_details/presentation/widgets/cast_box.dart';
@@ -22,7 +23,31 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var movieDetails = ModalRoute.of(context)!.settings.arguments as MovieEntity;
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final movie = args['browse'] ?? args['movie'];
+
+    String title = "";
+    String image = "";
+    int year = 0;
+    double rating = 0.0;
+    int runtime = 0;
+    String summary = "No summary available";
+
+    if (movie is MovieEntity) {
+      title = movie.title ;
+      image = movie.largeCoverImage ?? "";
+      year = movie.year ;
+      rating = movie.rating ;
+      runtime = movie.runtime ;
+      summary = movie.summary ?? "No summary available";
+    } else if (movie is BrowseEntity) {
+      title = movie.title;
+      image = movie.largeCoverImage ?? "";
+      year = movie.year;
+      rating = movie.rating ;
+      runtime = movie.runtime;
+      summary = movie.summary ?? "No summary available";
+    }
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -37,11 +62,16 @@ class MovieDetailsScreen extends StatelessWidget {
                   // Movie poster - full width
                   Positioned.fill(
                     child: Image.network(
-                      movieDetails.largeCoverImage ?? '',
+                      image,
                       width: double.infinity,
                       height: double.infinity,
-                      fit: BoxFit
-                          .cover, // This ensures the image covers the entire area
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey,
+                          child: const Icon(Icons.movie, size: 100),
+                        );
+                      },
                     ),
                   ),
 
@@ -68,7 +98,6 @@ class MovieDetailsScreen extends StatelessWidget {
                   Positioned(
                     top: 29.h,
                     right: 16.w,
-                    // Changed from left to right for better positioning
                     child: Container(
                       padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
@@ -106,33 +135,17 @@ class MovieDetailsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Play icon - centered
-                  // Positioned(
-                  //   top: 0,
-                  //   left: 0,
-                  //   right: 0,
-                  //   bottom: 100.h,
-                  //   // Leave space for text at bottom
-                  //   child: const Center(
-                  //     child: Icon(
-                  //       Icons.play_circle,
-                  //       color: ColorsManager.yellow,
-                  //       size: 97,
-                  //     ),
-                  //   ),
-                  // ),
-
                   // Movie title - with proper text wrapping
                   Positioned(
                     left: 20.w,
-                    right: 20.w, // Added right constraint to prevent overflow
-                    bottom: 60.h, // Position from bottom instead of top
+                    right: 20.w,
+                    bottom: 60.h,
                     child: Text(
-                      movieDetails.title,
+                      title,
                       style: AppStyles.mainStyle,
-                      maxLines: 2, // Allow text to wrap to 2 lines
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center, // Handle overflow gracefully
+                      textAlign: TextAlign.center,
                     ),
                   ),
 
@@ -142,7 +155,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     right: 0,
                     bottom: 20.h,
                     child: Text(
-                      movieDetails.year.toString(),
+                      year.toString(),
                       style: AppStyles.year,
                       textAlign: TextAlign.center,
                     ),
@@ -163,12 +176,12 @@ class MovieDetailsScreen extends StatelessWidget {
                         .copyWith(color: ColorsManager.white),
                   ),
                   SizedBox(height: 18.h),
-                   Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                     const InformationBox(title: '15', iconImage: ImageAssets.heart),
-                      InformationBox(title: movieDetails.runtime.toString(), iconImage: ImageAssets.clock),
-                      InformationBox(title: movieDetails.rating.toString(), iconImage: ImageAssets.star),
+                      const InformationBox(title: '15', iconImage: ImageAssets.heart),
+                      InformationBox(title: runtime.toString(), iconImage: ImageAssets.clock),
+                      InformationBox(title: rating.toString(), iconImage: ImageAssets.star),
                     ],
                   ),
                   SizedBox(height: 18.h),
@@ -210,7 +223,6 @@ class MovieDetailsScreen extends StatelessWidget {
                                   movie: state.movies[index],
                                   rating: state.movies[index].rating.toString(),
                                   imageUrl: state.movies[index].mediumCoverImage,
-
                                 ),
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisSpacing: 20.w,
@@ -234,7 +246,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 18.h),
                   Text(
-                    'Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346',
+                    summary,
                     style: AppStyles.description,
                   ),
 
