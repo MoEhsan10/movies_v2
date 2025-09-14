@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_v2/features/main_layout/browse/presentation/cubit/browse_cubit.dart';
+import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_cubit.dart';
 import 'package:movies_v2/shared/config/theme/app_theme.dart';
 import 'package:movies_v2/shared/di/service_locator.dart';
 import 'package:movies_v2/shared/routes_manager/routes.dart';
@@ -16,15 +19,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(430, 932),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: RoutesGenerator.getRoute,
-        initialRoute: Routes.main,
-        theme: AppTheme.appTheme,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => serviceLocator.get<HomeCubit>()),
+        BlocProvider(create: (context) => serviceLocator.get<BrowseCubit>()),
+      ],
+      child: ScreenUtilInit(
+        designSize: const Size(430, 932),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: RoutesGenerator.getRoute,
+          initialRoute: Routes.main,
+          theme: AppTheme.appTheme,
+        ),
       ),
     );
   }

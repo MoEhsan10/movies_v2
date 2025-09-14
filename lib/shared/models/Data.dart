@@ -1,5 +1,4 @@
-
-import 'package:movies_v2/features/main_layout/home/data/models/Movies.dart';
+import 'package:movies_v2/shared/models/Movies.dart';
 
 class Data {
   Data({

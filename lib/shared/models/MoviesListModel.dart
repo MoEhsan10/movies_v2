@@ -1,6 +1,4 @@
-
-import 'package:movies_v2/features/main_layout/home/data/models/meta.dart';
-
+import 'package:movies_v2/shared/models/meta.dart';
 import 'Data.dart';
 
 class MoviesListModel {
