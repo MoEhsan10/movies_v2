@@ -11,6 +11,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool isPassword;
   final TextStyle? style;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final Color? prefixIconColor;
 
   const CustomTextFormField({
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isPassword = false,
     this.style,
     this.prefixIcon,
+    this.suffixIcon,
     this.prefixIconColor,
   });
 
@@ -47,6 +49,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       style: widget.style,
       obscureText: isObscure,
       decoration: InputDecoration(
+
         hintText: widget.hintText,
         hintStyle: widget.hintStyle,
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),

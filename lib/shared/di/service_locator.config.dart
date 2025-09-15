@@ -35,6 +35,16 @@ import 'package:movies_v2/features/main_layout/home/domain/use_cases/get_movies_
     as _i64;
 import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_cubit.dart'
     as _i991;
+import 'package:movies_v2/features/main_layout/search/data/data_sourcess/remote/search_api_remote_data_source.dart'
+    as _i638;
+import 'package:movies_v2/features/main_layout/search/data/data_sourcess/remote/search_remote_data_source.dart'
+    as _i418;
+import 'package:movies_v2/features/main_layout/search/data/repositories/search_repository_impl.dart'
+    as _i925;
+import 'package:movies_v2/features/main_layout/search/domain/repositories/search_repository.dart'
+    as _i295;
+import 'package:movies_v2/features/main_layout/search/presentation/cubit/search_cubit.dart'
+    as _i57;
 import 'package:movies_v2/shared/di/network_module.dart' as _i885;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -54,8 +64,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i49.HomeApiRemoteDataSource(gh<_i361.Dio>()));
     gh.singleton<_i240.BrowseRemoteDataSource>(
         () => _i778.BrowseApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.singleton<_i418.SearchRemoteDataSource>(
+        () => _i638.SearchApiRemoteDataSource(gh<_i361.Dio>()));
+    gh.singleton<_i295.SearchRepository>(
+        () => _i925.SearchRepositoryImpl(gh<_i418.SearchRemoteDataSource>()));
     gh.singleton<_i989.BrowseRepository>(
         () => _i135.BrowseRepositoryImpl(gh<_i240.BrowseRemoteDataSource>()));
+    gh.singleton<_i57.SearchCubit>(
+        () => _i57.SearchCubit(gh<_i295.SearchRepository>()));
     gh.factory<_i718.BrowseCubit>(
         () => _i718.BrowseCubit(gh<_i989.BrowseRepository>()));
     gh.singleton<_i787.HomeRepository>(
