@@ -237,7 +237,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InformationBox(title: getRating(entity).toStringAsFixed(1), iconImage: ImageAssets.star),
-              InformationBox(title: '${getRuntime(entity)} min', iconImage: ImageAssets.clock),
+              InformationBox(title: '${getRuntime(entity)} ', iconImage: ImageAssets.clock),
               InformationBox(title: getYear(entity).toString(), iconImage: ImageAssets.heart),
             ],
           ),
