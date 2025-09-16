@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_v2/shared/config/theme/app_styles.dart';
 import 'package:movies_v2/shared/resources/colors_manager.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -46,7 +47,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       controller: widget.controller,
       keyboardType: widget.keyboardType,
-      style: widget.style,
+      style: widget.style ?? AppStyles.hintText,
       obscureText: isObscure,
       decoration: InputDecoration(
 
