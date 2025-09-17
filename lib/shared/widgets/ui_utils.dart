@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_v2/shared/config/theme/app_styles.dart';
 import 'package:movies_v2/shared/resources/colors_manager.dart';
 
 class UIUtils {
@@ -11,17 +12,17 @@ class UIUtils {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorsManager.black,
             borderRadius: BorderRadius.circular(10),
           ),
-          child: const Row(
+          child:  Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircularProgressIndicator(color: ColorsManager.yellow ,),
-               SizedBox(width: 20),
+            const  CircularProgressIndicator(color: ColorsManager.yellow ,),
+              const SizedBox(width: 20),
                Text(
                 "Loading...",
-                style: TextStyle(fontSize: 16),
+                style: AppStyles.appBar,
               ),
             ],
           ),

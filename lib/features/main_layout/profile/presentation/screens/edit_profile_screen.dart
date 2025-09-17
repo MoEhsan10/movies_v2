@@ -17,6 +17,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+  var formKsy =GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,54 +32,57 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
       body: Padding(
         padding:  REdgeInsets.all(16),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 55.w,
-              backgroundImage: const AssetImage(ImageAssets.gamerProfile),
-            ),
-            SizedBox(height: 35.h),
-            CustomTextFormField(
-              controller: _emailController,
-              hintText: 'Email',
-              hintStyle: AppStyles.hintText,
-              prefixIcon: const ImageIcon(AssetImage(ImageAssets.email)),
-              validator: AppValidators.validateEmail,
-            ),
-            SizedBox(height: 24.h),
-            CustomTextFormField(
-              controller: _phoneController,
-              hintText: 'Phone Number',
-              hintStyle: AppStyles.hintText,
-              prefixIcon: const ImageIcon(AssetImage(ImageAssets.phone)),
-              validator: AppValidators.validatePhoneNumber,
-            ),
-            SizedBox(height: 24.h),
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text('Reset Password',style: AppStyles.suggestion.copyWith(
-                color: ColorsManager.white,
-                fontSize: 20.sp
-              ),),
-            ),
-            const Spacer(),
-            Column(
-              children: [
-                CustomElevatedButton(
-                  label: 'Delete Account',
-                  onTap: () {},
-                  textStyle: AppStyles.elevatedButton.copyWith(color: ColorsManager.white),
-                  backgroundColor: ColorsManager.red,
-                ),
-                SizedBox(height: 17.h),
-                CustomElevatedButton(
-                  label: 'Update Data',
-                  onTap: () {},
-                  textStyle: AppStyles.elevatedButton,
-                ),
-              ],
-            )
-          ],
+        child: Form(
+          key: formKsy,
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 55.w,
+                backgroundImage: const AssetImage(ImageAssets.gamerProfile),
+              ),
+              SizedBox(height: 35.h),
+              CustomTextFormField(
+                controller: _emailController,
+                hintText: 'Email',
+                hintStyle: AppStyles.hintText,
+                prefixIcon: const ImageIcon(AssetImage(ImageAssets.email)),
+                validator: AppValidators.validateEmail,
+              ),
+              SizedBox(height: 24.h),
+              CustomTextFormField(
+                controller: _phoneController,
+                hintText: 'Phone Number',
+                hintStyle: AppStyles.hintText,
+                prefixIcon: const ImageIcon(AssetImage(ImageAssets.phone)),
+                validator: AppValidators.validatePhoneNumber,
+              ),
+              SizedBox(height: 24.h),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text('Reset Password',style: AppStyles.suggestion.copyWith(
+                  color: ColorsManager.white,
+                  fontSize: 20.sp
+                ),),
+              ),
+              const Spacer(),
+              Column(
+                children: [
+                  CustomElevatedButton(
+                    label: 'Delete Account',
+                    onTap: () {},
+                    textStyle: AppStyles.elevatedButton.copyWith(color: ColorsManager.white),
+                    backgroundColor: ColorsManager.red,
+                  ),
+                  SizedBox(height: 17.h),
+                  CustomElevatedButton(
+                    label: 'Update Data',
+                    onTap: () {},
+                    textStyle: AppStyles.elevatedButton,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
