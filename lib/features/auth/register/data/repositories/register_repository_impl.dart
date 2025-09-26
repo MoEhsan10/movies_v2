@@ -25,6 +25,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
       final result = await _registerRemoteDataSource.register(
           userName: userName,
           email: email,
+          phone: phone,
           password: password,
           rePassword: rePassword);
       return Right(result);

@@ -59,6 +59,18 @@ import 'package:movies_v2/features/main_layout/home/domain/use_cases/get_movies_
     as _i64;
 import 'package:movies_v2/features/main_layout/home/presentation/cubit/home_/home_cubit.dart'
     as _i991;
+import 'package:movies_v2/features/main_layout/movie_details/data/data_sources/remote/movie_details_fire_base_data_source.dart'
+    as _i822;
+import 'package:movies_v2/features/main_layout/movie_details/data/data_sources/remote/movie_details_remote_data_source.dart'
+    as _i849;
+import 'package:movies_v2/features/main_layout/movie_details/data/repository/movie_details_repository_impl.dart'
+    as _i1025;
+import 'package:movies_v2/features/main_layout/movie_details/domain/repository/movie_details_repository.dart'
+    as _i1059;
+import 'package:movies_v2/features/main_layout/movie_details/domain/use_case/add_movie_to_watchlist_use_case.dart'
+    as _i745;
+import 'package:movies_v2/features/main_layout/movie_details/presentation/cubit/movie_details_cubit.dart'
+    as _i765;
 import 'package:movies_v2/features/main_layout/search/data/data_sourcess/remote/search_api_remote_data_source.dart'
     as _i638;
 import 'package:movies_v2/features/main_layout/search/data/data_sourcess/remote/search_remote_data_source.dart'
@@ -84,6 +96,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final networkModule = _$NetworkModule();
     gh.singleton<_i361.Dio>(() => networkModule.dio);
+    gh.singleton<_i849.MovieDetailsRemoteDataSource>(
+        () => _i822.MovieDetailsFireBaseDataSource());
+    gh.singleton<_i1059.MovieDetailsRepository>(() =>
+        _i1025.MovieDetailsRepositoryImpl(
+            gh<_i849.MovieDetailsRemoteDataSource>()));
     gh.singleton<_i607.HomeRemoteDataSource>(
         () => _i49.HomeApiRemoteDataSource(gh<_i361.Dio>()));
     gh.singleton<_i240.BrowseRemoteDataSource>(
@@ -112,8 +129,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i285.RegisterUseCase(gh<_i634.RegisterRepository>()));
     gh.singleton<_i126.GetMoviesByGenreUseCase>(
         () => _i126.GetMoviesByGenreUseCase(gh<_i989.BrowseRepository>()));
+    gh.singleton<_i745.AddMovieToWatchlistUseCase>(() =>
+        _i745.AddMovieToWatchlistUseCase(gh<_i1059.MovieDetailsRepository>()));
     gh.singleton<_i428.LoginUseCase>(
         () => _i428.LoginUseCase(gh<_i825.LoginRepository>()));
+    gh.singleton<_i765.MovieDetailsCubit>(
+        () => _i765.MovieDetailsCubit(gh<_i745.AddMovieToWatchlistUseCase>()));
     gh.singleton<_i854.RegisterCubit>(
         () => _i854.RegisterCubit(gh<_i285.RegisterUseCase>()));
     gh.singleton<_i64.GetMoviesByCategoryUseCase>(

@@ -49,12 +49,7 @@ class _ProfileTabState extends State<ProfileTab> {
               SizedBox(height: 24.h),
 
               // Stats Row (12 Wish List, 10 History)
-              Row(
-
-                children: [
-                  ProfileLabels()
-                ],
-              ),
+                const ProfileLabels(),
 
               SizedBox(height: 24.h),
 
