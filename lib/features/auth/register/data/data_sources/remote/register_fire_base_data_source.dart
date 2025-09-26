@@ -14,6 +14,7 @@ class RegisterFireBaseDataSource implements RegisterRemoteDataSource {
       {
       required String userName,
       required String email,
+      required String phone,
       required String password,
       required String rePassword}) async {
     UserCredential credential = await FirebaseAuth.instance
@@ -21,6 +22,7 @@ class RegisterFireBaseDataSource implements RegisterRemoteDataSource {
     UserModel user = UserModel(
         id: credential.user!.uid,
         userName: userName,
+        phone: phone,
         email: email);
     CollectionReference<UserModel> userCollection = GetUserCollection.getUsersCollection();
     userCollection.doc(user.id).set(user);

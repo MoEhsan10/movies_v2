@@ -4,5 +4,5 @@ import '../../../../../shared/entities/user_entity.dart';
 
 extension RegisterMapper on UserModel {
   UserEntity get toEntityRegister =>
-      UserEntity(id: id, userName: userName, email: email);
+      UserEntity(id: id, userName: userName, email: email,phone: phone);
 }

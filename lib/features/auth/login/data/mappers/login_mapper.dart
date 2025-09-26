@@ -4,5 +4,5 @@ import '../../../../../shared/entities/user_entity.dart';
 
 extension LoginMapper on UserModel {
   UserEntity get toEntityLogin =>
-      UserEntity(id: id,userName: userName, email: email);
+      UserEntity(id: id,userName: userName, email: email,phone: phone);
 }
